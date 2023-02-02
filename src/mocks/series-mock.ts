@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { SerieType } from "../series";
+import { SerieType } from "../models/serie-model";
 
-const SERIE: SerieType[] = [
+export const SERIE: SerieType[] = [
   {
     id: 1,
     name: 'The Sopranos',
