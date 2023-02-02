@@ -1,4 +1,7 @@
-const series = [
+/* eslint-disable no-unused-vars */
+import { SerieType } from "../series";
+
+const SERIE: SerieType[] = [
   {
     id: 1,
     name: 'The Sopranos',
