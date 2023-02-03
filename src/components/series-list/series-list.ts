@@ -1,42 +1,45 @@
-export class Tasks extends Component {
-  public series: TaskStructure[];
-  constructor(public selector: string, public repo: TaskStorageRepo) {
+/* eslint-disable no-unused-vars */
+import { SerieType } from '../../models/serie-model';
+import { Component } from '../component/component';
+import { Serie } from '../serie/serie';
+
+export class Seriess extends Component {
+  constructor(public selector: string, public series: SerieType[]) {
     super();
-    this.series = this.repo.getTasks();
     this.template = this.createTemplate();
     this.render('afterbegin');
   }
 
-  addTask(serie: TaskStructure) {
-    this.series = [...this.series, serie];
-    this.render('afterbegin');
-    this.repo.setTasks(this.series);
-  }
+  // addSerie(serie: SerieType) {
+  //   this.series = [...this.series];
+  //   this.render('afterbegin');
+  // }
 
-  deleteTask(id: TaskStructure['id']) {
+  deleteSerie(id: SerieType['id']) {
     this.series = this.series.filter((item) => item.id !== id);
     this.render('afterbegin');
-    this.repo.setTasks(this.series);
   }
 
-  updateTask(serie: TaskStructure) {
-    this.series = this.series.map((item) => (item.id === serie.id ? serie : item));
+  updateSerie(serie: SerieType) {
+    this.series = this.series.map((item) =>
+      item.id === serie.id ? serie : item
+    );
     this.render('afterbegin');
-    this.repo.setTasks(this.series);
   }
 
   render(place: globalThis.InsertPosition) {
-    (document.querySelector('main') as HTMLElement).innerHTML = '';
+    (document.querySelector('.series-list--watched') as HTMLElement).innerHTML = '';
     super.render(place);
-    new Add('.series', this.addTask.bind(this));
-    this.series.forEach((item) => {
-      new Card(
-        '.series>ul',
-        item,
-        this.deleteTask.bind(this),
-        this.updateTask.bind(this)
-      );
-    });
+
+  //   new Add('.series-list--watched', this.addSerie.bind(this));
+  //   this.series.forEach((item) => {
+  //     new Serie(
+  //       '.series-watched>ul',
+  //       item,
+  //       this.deleteSerie.bind(this),
+  //       this.updateSerie.bind(this)
+  //     );
+  //   });
   }
 
   createTemplate() {
